@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* ─── Design Tokens ───────────────────────────────────────── */
+:root {
+  --bg:           #000000;
+  --bg-2:         #080808;
+  --bg-3:         #0f0f0f;
+  --surface:      #141414;
+  --surface-2:    #1a1a1a;
+  --border:       #1f1f1f;
+  --border-2:     #2a2a2a;
+
+  --text:         #f0f0f0;
+  --text-2:       #888888;
+  --text-3:       #444444;
+
+  --neural:       #00ff9f;   /* synapse green  */
+  --neural-dim:   rgba(0, 255, 159, 0.12);
+  --neural-glow:  rgba(0, 255, 159, 0.25);
+  --electric:     #0066ff;   /* data-flow blue */
+  --electric-dim: rgba(0, 102, 255, 0.12);
+  --pulse:        #ff3cac;   /* activation pink — sparingly */
+
+  --font-head: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+
+  --transition: 0.2s ease;
+}
+
+/* ─── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--neural); }
+
+/* ─── Selection ───────────────────────────────────────────── */
+::selection {
+  background: rgba(0, 255, 159, 0.2);
+  color: var(--neural);
+}
+
+/* ─── Typography Scale ────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+/* ─── Utility Classes ─────────────────────────────────────── */
+.neural-text {
+  color: var(--neural);
+  font-family: var(--font-mono);
+}
+
+.electric-text { color: var(--electric); }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badge-neural {
+  background: var(--neural-dim);
+  color: var(--neural);
+  border: 1px solid rgba(0,255,159,0.2);
+}
+
+.badge-electric {
+  background: var(--electric-dim);
+  color: #4d9fff;
+  border: 1px solid rgba(0,102,255,0.25);
+}
+
+.badge-pulse {
+  background: rgba(255,60,172,0.1);
+  color: var(--pulse);
+  border: 1px solid rgba(255,60,172,0.2);
+}
+
+.badge-muted {
+  background: var(--surface);
+  color: var(--text-2);
+  border: 1px solid var(--border-2);
+}
+
+/* ─── Neural Glow Effect ──────────────────────────────────── */
+.neural-glow {
+  box-shadow: 0 0 20px rgba(0, 255, 159, 0.15),
+              0 0 60px rgba(0, 255, 159, 0.05);
+}
+
+/* ─── Divider ─────────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ─── Canvas ──────────────────────────────────────────────── */
+canvas {
+  touch-action: none;
+  display: block;
+}
+
+/* ─── Animations ──────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes pulse-node {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.4); }
+}
+
+@keyframes data-flow {
+  0%   { stroke-dashoffset: 200; }
+  100% { stroke-dashoffset: 0; }
+}
